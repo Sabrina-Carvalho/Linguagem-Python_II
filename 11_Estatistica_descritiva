@@ -1,0 +1,29 @@
+# Estatísticas Descritivas
+
+grupo_bairro['Valor'].describe().round(2)
+
+grupo_bairro['Valor'].aggregate(['min','max']).rename(columns = {'min': 'Mínimo', 'max': 'Máximo'})
+
+fig = grupo_bairro['Valor'].mean().plot.bar(color = 'gray')
+fig.set_ylabel('Valor do Aluguel')
+fig.set_title('Valor Médio do Aluguel por Bairro', {'fontsize': 22})
+
+# 1 e 2
+# 3 e 4
+# 5 e 6
+# 7 ou mais
+
+classes = [0, 2, 4, 6, 100]
+
+quartos = pd.cut(dados.Quartos, classes)
+quartos
+
+pd.value_counts(quartos)
+
+labels = ['1 e 2 quartos', '3 e 4 quartos', '5 e 6 quartos', '7 quartos ou mais']
+
+quartos = pd.cut(dados.Quartos, classes, labels = labels)
+
+pd.value_counts(quartos)
+
+quartos = pd.cut(dados.Quartos, classes, labels = labels, include_lowest = True)
